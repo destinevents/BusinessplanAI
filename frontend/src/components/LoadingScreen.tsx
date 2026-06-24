@@ -40,7 +40,7 @@ export function LoadingScreen({ genLabel, progress }: Props) {
             color: C.brown,
           }}
         >
-          Ginagawa ang business plan mo...
+          Generating your business plan...
         </h2>
         <p style={{ fontSize: 14, color: C.mid, marginBottom: 22 }}>
           Now generating: <strong style={{ color: C.gold }}>{genLabel}</strong>

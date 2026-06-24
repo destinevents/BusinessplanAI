@@ -34,7 +34,7 @@ export function QuestionForm({ form, onChange, onSubmit, credits }: Props) {
           Business Plan <em style={{ color: C.gold }}>In A Day</em>
         </h1>
         <p style={{ fontSize: 14, color: C.mid, fontStyle: "italic" }}>
-          Sagutan ang 5 questions, at makakuha ng kompletong business plan sa loob ng ilang minuto! 🚀
+          Answer 5 questions and get a complete business plan in minutes! 🚀
         </p>
       </div>
 
@@ -79,7 +79,7 @@ export function QuestionForm({ form, onChange, onSubmit, credits }: Props) {
               textAlign: "center",
             }}
           >
-            Wala ka nang credits. Contact @DisenyoDigitals para mag-top up. 💛
+            You're out of credits. Contact @DisenyoDigitals to top up. 💛
           </div>
         )}
 

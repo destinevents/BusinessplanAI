@@ -87,12 +87,12 @@ export function PlanContent({ activeTab, content, onRetry }: Props) {
               fontStyle: "italic",
             }}
           >
-            Hindi na-generate ang {curTab?.label}
+            Failed to generate {curTab?.label}
           </h3>
           <p style={{ fontSize: 14, color: C.light, maxWidth: 360 }}>
-            Maaaring may connection issue. I-click ang button para i-retry.
+            There may be a connection issue. Click the button below to retry.
             <br />
-            <em style={{ fontSize: 12 }}>Libre ito — walang credit na ma-deduct sa retry.</em>
+            <em style={{ fontSize: 12 }}>Free retry — no credits will be deducted.</em>
           </p>
           <button
             onClick={() => onRetry(activeTab)}
@@ -107,7 +107,7 @@ export function PlanContent({ activeTab, content, onRetry }: Props) {
               cursor: "pointer",
             }}
           >
-            🔄 I-retry ang {curTab?.label}
+            🔄 Retry {curTab?.label}
           </button>
         </div>
       )}
