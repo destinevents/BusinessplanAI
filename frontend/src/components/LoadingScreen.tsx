@@ -18,6 +18,7 @@ export function LoadingScreen({ genLabel, progress }: Props) {
       }}
     >
       <div
+        className="loading-card"
         style={{
           background: C.card,
           borderRadius: 20,

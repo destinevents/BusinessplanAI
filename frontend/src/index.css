@@ -116,3 +116,73 @@ input::placeholder {
 /* ── Scrollbar ───────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 5px; }
 ::-webkit-scrollbar-thumb { background: #c9a07a; border-radius: 4px; }
+
+/* ── Tab bar: horizontal scroll on mobile ────────────────────────────────── */
+.tab-bar {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  flex-wrap: nowrap !important;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-bar > button { flex-shrink: 0; }
+
+/* ── Plan content box ────────────────────────────────────────────────────── */
+.plan-content-box {
+  padding: 30px 34px;
+}
+
+/* ── Result action buttons ───────────────────────────────────────────────── */
+.result-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ── Responsive breakpoints ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Hide email in header to save space */
+  .header-email { display: none !important; }
+
+  /* Tighter header padding */
+  .app-header { padding: 14px 16px !important; }
+
+  /* Plan content less padding */
+  .plan-content-box { padding: 20px 16px !important; }
+
+  /* Tables scroll horizontally instead of breaking */
+  .md table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0;
+  }
+
+  /* Result view padding */
+  .result-view { padding: 16px 12px 48px !important; }
+
+  /* Steps grid single column */
+  .steps-grid { grid-template-columns: 1fr !important; }
+
+  /* Question form tighter */
+  .question-form { padding: 24px 16px !important; }
+
+  /* Loading screen */
+  .loading-card { padding: 36px 20px !important; }
+}
+
+@media (max-width: 480px) {
+  /* Smaller heading on tiny screens */
+  .result-title  { font-size: 24px !important; }
+  .form-title    { font-size: 26px !important; }
+
+  /* Stack result action buttons */
+  .result-actions { flex-direction: column; align-items: stretch; }
+  .result-actions button { width: 100% !important; }
+
+  /* Smaller table text */
+  .md th, .md td { padding: 8px 10px; font-size: 12px; }
+  .md h1 { font-size: 15px; }
+  .md h2 { font-size: 14px; }
+}

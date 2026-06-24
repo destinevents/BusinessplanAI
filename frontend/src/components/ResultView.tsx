@@ -102,11 +102,12 @@ ${sections}
   };
 
   return (
-    <div style={{ maxWidth: 960, width: "100%", padding: "30px 24px 64px", boxSizing: "border-box" }}>
+    <div className="result-view" style={{ maxWidth: 960, width: "100%", padding: "30px 24px 64px", boxSizing: "border-box" }}>
       {/* Success header */}
       <div style={{ ...card, padding: "32px 28px", textAlign: "center", marginBottom: 18 }}>
         <div style={{ fontSize: 40 }}>🎉</div>
         <h1
+          className="result-title"
           style={{
             fontSize: 32,
             fontFamily: "'Playfair Display',serif",
@@ -120,7 +121,7 @@ ${sections}
         <p style={{ fontSize: 14, color: C.mid, fontStyle: "italic", marginBottom: 16 }}>
           <strong style={{ color: C.gold }}>{form.business}</strong> · {form.location}
         </p>
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
+        <div className="result-actions">
           <button
             onClick={onReset}
             style={{
@@ -178,6 +179,7 @@ ${sections}
           ✦ 10 Steps to Get Started Today
         </h3>
         <div
+          className="steps-grid"
           style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(230px,1fr))", gap: 9 }}
         >
           {STEPS.map((item, i) => (

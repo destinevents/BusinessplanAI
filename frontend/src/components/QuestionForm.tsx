@@ -20,9 +20,10 @@ export function QuestionForm({ form, onChange, onSubmit, credits }: Props) {
   const canGenerate = !!required && credits > 0;
 
   return (
-    <div style={{ maxWidth: 680, width: "100%", padding: "40px 24px" }}>
+    <div className="question-form" style={{ maxWidth: 680, width: "100%", padding: "40px 24px" }}>
       <div style={{ ...card, textAlign: "center", marginBottom: 28 }}>
         <h1
+          className="form-title"
           style={{
             fontSize: 32,
             fontFamily: "'Playfair Display',serif",

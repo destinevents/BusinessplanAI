@@ -92,6 +92,7 @@ export function App() {
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center" }}>
       <header
+        className="app-header"
         style={{
           width: "100%",
           background: C.dark,
@@ -138,7 +139,7 @@ export function App() {
       >
         <Logo color="#EDE0CC" accentColor={C.gold} width={175} />
         <p style={{ fontSize: 11, color: "#4a2e18", textAlign: "center" }}>
-          Para sa mga Pinoy negosyante · Philippines 🇵🇭
+          For Filipino entrepreneurs · Philippines 🇵🇭
         </p>
       </footer>
     </div>

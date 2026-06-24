@@ -17,11 +17,11 @@ export function PlanContent({ activeTab, content, onRetry }: Props) {
 
   return (
     <div
+      className="plan-content-box"
       style={{
         background: C.card,
         borderRadius: 20,
         minHeight: 440,
-        padding: "30px 34px",
         boxShadow: "0 2px 12px rgba(44,26,14,0.06)",
       }}
     >

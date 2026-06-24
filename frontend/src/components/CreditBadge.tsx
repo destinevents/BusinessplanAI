@@ -24,7 +24,7 @@ export function CreditBadge() {
         </span>
       </div>
       {email && (
-        <span style={{ fontSize: 11, color: "#5a3a1a", letterSpacing: ".03em" }}>
+        <span className="header-email" style={{ fontSize: 11, color: "#5a3a1a", letterSpacing: ".03em" }}>
           {email}
         </span>
       )}

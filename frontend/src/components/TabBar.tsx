@@ -10,12 +10,12 @@ interface Props {
 export function TabBar({ activeTab, content, onSelect }: Props) {
   return (
     <div
+      className="tab-bar"
       style={{
         background: C.card,
         borderRadius: 20,
         padding: 6,
         display: "flex",
-        flexWrap: "wrap",
         gap: 4,
         marginBottom: 18,
         boxShadow: "0 2px 12px rgba(44,26,14,0.06)",
