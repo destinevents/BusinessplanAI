@@ -106,4 +106,59 @@ router.post("/refund", async (req, res) => {
   }
 });
 
+// POST /api/admin/set-credits — set a user's balance to an exact amount
+router.post("/set-credits", async (req, res) => {
+  const schema = z.object({
+    email: z.string().email(),
+    amount: z.number().int().min(0).max(10000),
+    reason: z.string().max(200).optional(),
+  });
+  const parsed = schema.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: parsed.error.issues[0].message });
+    return;
+  }
+
+  const { email, amount, reason } = parsed.data;
+  const normalizedEmail = email.toLowerCase().trim();
+
+  try {
+    const result = await prisma.$transaction(async (tx) => {
+      const user = await tx.user.findUnique({ where: { email: normalizedEmail } });
+      if (!user) {
+        const err = new Error("User not found") as Error & { code: string };
+        err.code = "NOT_FOUND";
+        throw err;
+      }
+
+      const diff = amount - user.credits;
+
+      const updated = await tx.user.update({
+        where: { email: normalizedEmail },
+        data: { credits: amount },
+      });
+
+      await tx.creditTransaction.create({
+        data: {
+          userId: user.id,
+          amount: diff,
+          type: "GRANT",
+          reason: reason ?? `Credit reset to ${amount} by admin ${req.user!.email}`,
+        },
+      });
+
+      return updated;
+    });
+
+    res.json({ email: result.email, newBalance: result.credits });
+  } catch (err: unknown) {
+    if (err instanceof Error && (err as Error & { code?: string }).code === "NOT_FOUND") {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+    console.error("Set credits error:", err);
+    res.status(500).json({ error: "Failed to set credits" });
+  }
+});
+
 export default router;
