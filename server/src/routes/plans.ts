@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
-import { generateSection } from "../lib/openai";
+import { generateSection } from "../lib/claude";
 import { buildPrompt, TAB_IDS, FormData } from "../lib/prompts";
 
 const router = Router();

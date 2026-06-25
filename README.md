@@ -1,6 +1,6 @@
 # Business Plan In A Day — DisenyoDigitals
 
-A secure, full-stack web app that generates 7-section Filipino business plans using OpenAI. Built for Pinoy entrepreneurs. 🇵🇭
+A secure, full-stack web app that generates 7-section Filipino business plans using Claude (Anthropic). Built for Pinoy entrepreneurs. 🇵🇭
 
 ---
 
@@ -20,7 +20,7 @@ A secure, full-stack web app that generates 7-section Filipino business plans us
 
 - Node.js 18+
 - A [Neon](https://neon.tech) account (free PostgreSQL)
-- An [OpenAI](https://platform.openai.com) API key (**new key only — never reuse a leaked key**)
+- An [Anthropic](https://console.anthropic.com) API key (**new key only — never reuse a leaked key**)
 - A [Railway](https://railway.app) account (backend hosting)
 - A [Vercel](https://vercel.com) account (frontend hosting)
 
@@ -49,7 +49,7 @@ npm run dev             # starts on http://localhost:3001
 
 | Variable | Description |
 |---|---|
-| `OPENAI_API_KEY` | New key from platform.openai.com |
+| `ANTHROPIC_API_KEY` | Key from console.anthropic.com |
 | `DATABASE_URL` | Neon PostgreSQL connection string |
 | `JWT_SECRET` | Random 64-char hex string (see tip below) |
 | `JWT_EXPIRES_IN` | Token lifetime, e.g. `7d` |
@@ -168,7 +168,7 @@ curl -X POST https://yourapp.up.railway.app/api/admin/grant-credits \
 
 ## Security Checklist ✅
 
-- [x] **OpenAI key is server-only** — lives in `server/.env`, never sent to or seen by the browser
+- [x] **Claude key is server-only** — lives in `server/.env`, never sent to or seen by the browser
 - [x] **Auth enforced on all routes** — `requireAuth` middleware rejects any request without a valid JWT; `requireAdmin` gates admin endpoints
 - [x] **Credits enforced atomically server-side** — `prisma.$transaction` ensures balance check + deduction happen in one DB transaction; concurrent requests can't double-spend
 - [x] **Secrets gitignored** — `.env` and `server/.env` are in `.gitignore`; only `.env.example` files with placeholders are committed

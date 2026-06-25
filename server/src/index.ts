@@ -30,7 +30,7 @@ app.use(
 
 app.use(express.json({ limit: "16kb" }));
 
-// Rate limiter scoped to /api/plans (the expensive OpenAI calls)
+// Rate limiter scoped to /api/plans (the expensive Claude calls)
 const planLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 30,
