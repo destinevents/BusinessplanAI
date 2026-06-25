@@ -90,57 +90,77 @@ export function App() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <header
-        className="app-header"
-        style={{
-          width: "100%",
-          background: C.dark,
-          padding: "20px 28px",
-          boxSizing: "border-box",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: 12,
-        }}
-      >
-        <Logo color="#EDE0CC" accentColor={C.gold} width={200} />
-        <CreditBadge />
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <header className="app-header">
+        <div
+          className="container"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 12,
+            paddingTop: 16,
+            paddingBottom: 16,
+          }}
+        >
+          <Logo color="#EDE0CC" accentColor={C.gold} width={190} />
+          <CreditBadge />
+        </div>
       </header>
 
-      {step === "form" && (
-        <QuestionForm
-          form={form}
-          onChange={setForm}
-          onSubmit={generateAll}
-          credits={auth.credits}
-        />
-      )}
+      <main
+        style={{
+          flex: 1,
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        {step === "form" && (
+          <div key="form" className="fadein" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+            <QuestionForm form={form} onChange={setForm} onSubmit={generateAll} credits={auth.credits} />
+          </div>
+        )}
 
-      {step === "loading" && <LoadingScreen genLabel={genLabel} progress={progress} />}
+        {step === "loading" && (
+          <div key="loading" className="fadein" style={{ width: "100%", flex: 1, display: "flex" }}>
+            <LoadingScreen genLabel={genLabel} progress={progress} />
+          </div>
+        )}
 
-      {step === "result" && (
-        <ResultView form={form} content={content} onRetry={retryTab} onReset={reset} />
-      )}
+        {step === "result" && (
+          <div key="result" className="fadein" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+            <ResultView form={form} content={content} onRetry={retryTab} onReset={reset} />
+          </div>
+        )}
+      </main>
 
       <footer
         style={{
           width: "100%",
-          background: C.dark,
-          padding: "28px 24px",
-          boxSizing: "border-box",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 10,
+          background: "linear-gradient(180deg,#1c0d04,#160802)",
+          borderTop: "1px solid rgba(201,168,76,0.22)",
           marginTop: "auto",
         }}
       >
-        <Logo color="#EDE0CC" accentColor={C.gold} width={175} />
-        <p style={{ fontSize: 11, color: "#4a2e18", textAlign: "center" }}>
-          For Filipino entrepreneurs · Philippines 🇵🇭
-        </p>
+        <div
+          className="container"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 10,
+            paddingTop: 30,
+            paddingBottom: 30,
+          }}
+        >
+          <Logo color="#EDE0CC" accentColor={C.gold} width={160} />
+          <p style={{ fontSize: 12, color: "rgba(201,168,76,0.78)", textAlign: "center", letterSpacing: ".04em" }}>
+            For Filipino entrepreneurs · Philippines 🇵🇭
+          </p>
+        </div>
       </footer>
     </div>
   );

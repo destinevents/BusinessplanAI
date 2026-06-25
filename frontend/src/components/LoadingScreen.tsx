@@ -18,12 +18,9 @@ export function LoadingScreen({ genLabel, progress }: Props) {
       }}
     >
       <div
-        className="loading-card"
+        className="card loading-card"
         style={{
-          background: C.card,
-          borderRadius: 20,
           padding: "52px 40px",
-          boxShadow: "0 2px 12px rgba(44,26,14,0.06)",
           maxWidth: 480,
           width: "100%",
           textAlign: "center",

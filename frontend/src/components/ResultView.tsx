@@ -28,12 +28,6 @@ const STEPS = [
 export function ResultView({ form, content, onRetry, onReset }: Props) {
   const [activeTab, setActiveTab] = useState<TabId>("overview");
 
-  const card = {
-    background: C.card,
-    borderRadius: 20,
-    boxShadow: "0 2px 12px rgba(44,26,14,0.06)",
-  };
-
   const exportPlan = () => {
     const sections = TABS.map((tab) => {
       const c = content[tab.id] ?? "This section was not generated.";
@@ -104,7 +98,7 @@ ${sections}
   return (
     <div className="result-view" style={{ maxWidth: 960, width: "100%", padding: "30px 24px 64px", boxSizing: "border-box" }}>
       {/* Success header */}
-      <div style={{ ...card, padding: "32px 28px", textAlign: "center", marginBottom: 18 }}>
+      <div className="card" style={{ padding: "32px 28px", textAlign: "center", marginBottom: 18 }}>
         <div style={{ fontSize: 40 }}>🎉</div>
         <h1
           className="result-title"
@@ -116,38 +110,23 @@ ${sections}
             marginBottom: 8,
           }}
         >
-          Your <em style={{ color: C.accent }}>Business Plan</em> is Ready!
+          Your <em style={{ color: C.accent, fontStyle: "italic" }}>Business Plan</em> is Ready!
         </h1>
-        <p style={{ fontSize: 14, color: C.mid, fontStyle: "italic", marginBottom: 16 }}>
+        <p style={{ fontSize: 14, color: C.mid, fontStyle: "italic", marginBottom: 20 }}>
           <strong style={{ color: C.gold }}>{form.business}</strong> · {form.location}
         </p>
         <div className="result-actions">
           <button
             onClick={onReset}
-            style={{
-              background: "transparent",
-              border: `1px solid ${C.border}`,
-              color: C.mid,
-              borderRadius: 11,
-              padding: "10px 20px",
-              fontSize: 13,
-              cursor: "pointer",
-            }}
+            className="btn btn-secondary"
+            style={{ padding: "11px 20px", fontSize: 13 }}
           >
             ← Start Over
           </button>
           <button
             onClick={exportPlan}
-            style={{
-              background: `linear-gradient(135deg,${C.gold},${C.accent})`,
-              color: "#fff",
-              border: "none",
-              borderRadius: 14,
-              padding: "10px 22px",
-              fontSize: 13,
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
+            className="btn btn-primary"
+            style={{ padding: "11px 22px", fontSize: 13 }}
           >
             ⬇ Download Plan (HTML)
           </button>
@@ -185,13 +164,13 @@ ${sections}
           {STEPS.map((item, i) => (
             <div
               key={i}
+              className="step-card"
               style={{
                 background: C.card,
                 borderRadius: 14,
-                padding: "9px 13px",
+                padding: "10px 14px",
                 fontSize: 13,
                 color: "#4A2C10",
-                boxShadow: "0 1px 4px rgba(44,26,14,0.05)",
               }}
             >
               {item}

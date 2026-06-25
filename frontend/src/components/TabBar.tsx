@@ -32,10 +32,10 @@ export function TabBar({ activeTab, content, onSelect }: Props) {
           <button
             key={tab.id}
             onClick={() => onSelect(tab.id)}
+            className={`tab-btn${isActive ? " is-active" : ""}`}
             style={{
-              background: isActive ? `linear-gradient(135deg,${C.gold},${C.accent})` : "transparent",
+              background: isActive ? `linear-gradient(135deg,${C.gold},${C.accent})` : undefined,
               border: "none",
-              color: isActive ? "#fff" : C.mid,
               padding: "9px 13px",
               borderRadius: 11,
               cursor: "pointer",

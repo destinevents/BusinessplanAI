@@ -1,3 +1,8 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   DisenyoDigitals · Business Plan Studio — Design System
+   Warm editorial / luxury aesthetic. Tokens → base → components → overrides.
+   ════════════════════════════════════════════════════════════════════════════ */
+
 *,
 *::before,
 *::after {
@@ -6,16 +11,62 @@
   padding: 0;
 }
 
+/* ── Design tokens ───────────────────────────────────────────────────────── */
+:root {
+  /* palette (mirrors constants.ts C) */
+  --bg: #ede0cc;
+  --bg-deep: #e6d6ba;
+  --card: #faf4e8;
+  --card-raised: #fffdf9;
+  --border: #e3d6b9;
+  --border-strong: #d6c198;
+  --ink: #2c1a0e;
+  --ink-soft: #5a3a1e;
+  --ink-mute: #8a6a45;
+  --espresso: #160802;
+  --gold: #c9a84c;
+  --gold-deep: #b87a30;
+  --green: #27ae60;
+  --red: #d9534f;
+
+  /* spacing scale */
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px; --s5: 20px;
+  --s6: 24px; --s8: 32px; --s10: 40px; --s12: 48px;
+
+  /* radii */
+  --r-sm: 10px; --r: 16px; --r-lg: 22px; --r-pill: 999px;
+
+  /* shadows — soft, warm-tinted */
+  --sh-sm: 0 1px 3px rgba(44, 26, 14, 0.07);
+  --sh: 0 6px 22px rgba(44, 26, 14, 0.09);
+  --sh-md: 0 14px 36px rgba(44, 26, 14, 0.13);
+  --sh-lg: 0 26px 60px rgba(44, 26, 14, 0.2);
+  --sh-gold: 0 8px 20px rgba(184, 122, 48, 0.28);
+
+  /* effects */
+  --ring: 0 0 0 3px rgba(201, 168, 76, 0.34);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --container: 920px;
+}
+
+/* ── Base ────────────────────────────────────────────────────────────────── */
 body {
-  background: #ede0cc;
+  background:
+    radial-gradient(1100px 520px at 50% -8%, #f7f0df 0%, rgba(247, 240, 223, 0) 62%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: 'DM Sans', sans-serif;
-  color: #2c1a0e;
+  color: var(--ink);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 input,
 select,
-button {
+button,
+textarea {
   font-family: inherit;
 }
 
@@ -23,23 +74,177 @@ input::placeholder {
   color: #b8a07a;
 }
 
+/* respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
 /* ── Animations ──────────────────────────────────────────────────────────── */
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes gateIn {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.spin    { animation: spin 1.8s linear infinite; display: inline-block; }
-.fadein  { animation: fadeUp 0.35s ease both; }
+.spin   { animation: spin 1.8s linear infinite; display: inline-block; }
+.fadein { animation: fadeUp 0.4s var(--ease) both; }
+
+/* ── Layout primitives ───────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-left: var(--s6);
+  padding-right: var(--s6);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh);
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: var(--r);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s var(--ease), box-shadow 0.2s var(--ease),
+    background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease), opacity 0.2s;
+}
+.btn:focus-visible { outline: none; box-shadow: var(--ring); }
+.btn:active:not(:disabled) { transform: translateY(1px) scale(0.992); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+  color: #fff;
+  box-shadow: var(--sh-gold);
+}
+.btn-primary:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(184, 122, 48, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--ink-soft);
+}
+.btn-secondary:not(:disabled):hover {
+  background: var(--card-raised);
+  border-color: var(--gold);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.btn-gold-solid {
+  background: var(--gold);
+  color: var(--espresso);
+}
+.btn-gold-solid:not(:disabled):hover {
+  background: #d8b85e;
+  transform: translateY(-2px);
+  box-shadow: var(--sh-gold);
+}
+
+/* outline button for use on the dark header */
+.btn-outline-dark {
+  background: rgba(237, 224, 204, 0.05);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  color: #ede0cc;
+}
+.btn-outline-dark:not(:disabled):hover {
+  background: rgba(201, 168, 76, 0.16);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+/* ── Inputs ──────────────────────────────────────────────────────────────── */
+.input {
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--card-raised);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  outline: none;
+  transition: border-color 0.18s var(--ease), box-shadow 0.18s var(--ease), background 0.18s;
+}
+.input:hover { border-color: var(--border-strong); }
+.input:focus {
+  border-color: var(--gold);
+  background: #fff;
+  box-shadow: var(--ring);
+}
+
+/* underline input (login) */
+.input-line {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid rgba(201, 168, 76, 0.55);
+  color: #ede0cc;
+  font-size: 15px;
+  text-align: center;
+  padding: 11px 8px;
+  outline: none;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.input-line::placeholder { color: rgba(237, 224, 204, 0.4); letter-spacing: 0.04em; }
+.input-line:focus {
+  border-bottom-color: var(--gold);
+  box-shadow: 0 2px 0 -1px rgba(201, 168, 76, 0.4);
+}
+
+/* text link button */
+.link-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.18s var(--ease);
+}
+.link-btn:hover { color: var(--gold) !important; }
+.link-btn:focus-visible { outline: none; box-shadow: var(--ring); border-radius: 6px; }
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: linear-gradient(180deg, #1c0d04, var(--espresso));
+  border-bottom: 1px solid rgba(201, 168, 76, 0.22);
+  box-shadow: 0 6px 22px rgba(22, 8, 2, 0.28);
+}
 
 /* ── Markdown output (.md wrapper) ──────────────────────────────────────── */
 .md h1,
@@ -48,23 +253,24 @@ input::placeholder {
   font-family: 'Playfair Display', serif;
   font-style: italic;
   color: #5c3010;
-  margin: 18px 0 7px;
+  margin: 20px 0 8px;
   line-height: 1.3;
 }
-.md h1 { font-size: 18px; }
+.md h1 { font-size: 19px; }
 .md h2 { font-size: 16px; }
 .md h3 { font-size: 14px; }
+.md > :first-child { margin-top: 0; }
 
 .md p {
-  margin: 7px 0;
+  margin: 8px 0;
   line-height: 1.82;
   color: #3a1e08;
 }
 
 .md ul,
 .md ol {
-  padding-left: 20px;
-  margin: 7px 0;
+  padding-left: 22px;
+  margin: 8px 0;
 }
 
 .md li {
@@ -72,6 +278,8 @@ input::placeholder {
   color: #3a1e08;
   line-height: 1.7;
 }
+
+.md li::marker { color: var(--gold-deep); }
 
 .md strong {
   color: #1a0800;
@@ -84,9 +292,9 @@ input::placeholder {
   border-collapse: collapse;
   margin: 20px 0;
   background: white;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(44, 26, 14, 0.08);
+  box-shadow: var(--sh-sm);
 }
 
 .md thead tr {
@@ -99,12 +307,13 @@ input::placeholder {
   color: #ede0cc;
   font-weight: 600;
   font-size: 14px;
-  border-bottom: 2px solid #c9a84c;
+  border-bottom: 2px solid var(--gold);
 }
 
 .md tbody tr:nth-child(odd)  { background: #faf8f5; }
 .md tbody tr:nth-child(even) { background: #ffffff; }
-.md tbody tr { border-bottom: 1px solid #ede0cc; }
+.md tbody tr { border-bottom: 1px solid #ede0cc; transition: background 0.15s; }
+.md tbody tr:hover { background: #fdf6ea; }
 
 .md td {
   padding: 12px 16px;
@@ -114,8 +323,9 @@ input::placeholder {
 }
 
 /* ── Scrollbar ───────────────────────────────────────────────────────────── */
-::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar       { width: 7px; height: 7px; }
 ::-webkit-scrollbar-thumb { background: #c9a07a; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-deep); }
 
 /* ── Tab bar: horizontal scroll on mobile ────────────────────────────────── */
 .tab-bar {
@@ -127,10 +337,31 @@ input::placeholder {
 .tab-bar::-webkit-scrollbar { display: none; }
 .tab-bar > button { flex-shrink: 0; }
 
+/* tab buttons: hover feedback (inactive only) */
+.tab-btn {
+  background: transparent;
+  color: #7a4a18;
+  transition: background 0.18s var(--ease), color 0.18s var(--ease), transform 0.12s var(--ease);
+}
+.tab-btn:not(.is-active):hover {
+  background: rgba(201, 168, 76, 0.12);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+.tab-btn.is-active { color: #fff; }
+.tab-btn:focus-visible { outline: none; box-shadow: var(--ring); }
+
 /* ── Plan content box ────────────────────────────────────────────────────── */
 .plan-content-box {
   padding: 30px 34px;
 }
+
+/* quick-start step card hover */
+.step-card {
+  box-shadow: var(--sh-sm);
+  transition: transform 0.14s var(--ease), box-shadow 0.2s var(--ease);
+}
+.step-card:hover { transform: translateY(-2px); box-shadow: var(--sh); }
 
 /* ── Result action buttons ───────────────────────────────────────────────── */
 .result-actions {
@@ -142,11 +373,13 @@ input::placeholder {
 
 /* ── Responsive breakpoints ──────────────────────────────────────────────── */
 @media (max-width: 768px) {
+  :root { --container: 100%; }
+
   /* Hide email in header to save space */
   .header-email { display: none !important; }
 
-  /* Tighter header padding */
-  .app-header { padding: 14px 16px !important; }
+  /* Tighter container gutters */
+  .container { padding-left: var(--s4); padding-right: var(--s4); }
 
   /* Plan content less padding */
   .plan-content-box { padding: 20px 16px !important; }

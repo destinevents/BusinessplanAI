@@ -16,15 +16,7 @@ export function PlanContent({ activeTab, content, onRetry }: Props) {
   const hasContent = !!curContent && !curContent.startsWith("__");
 
   return (
-    <div
-      className="plan-content-box"
-      style={{
-        background: C.card,
-        borderRadius: 20,
-        minHeight: 440,
-        boxShadow: "0 2px 12px rgba(44,26,14,0.06)",
-      }}
-    >
+    <div className="card plan-content-box" style={{ minHeight: 440 }}>
       <div
         style={{
           display: "flex",
@@ -96,16 +88,8 @@ export function PlanContent({ activeTab, content, onRetry }: Props) {
           </p>
           <button
             onClick={() => onRetry(activeTab)}
-            style={{
-              background: `linear-gradient(135deg,${C.gold},${C.accent})`,
-              color: "#fff",
-              border: "none",
-              borderRadius: 14,
-              padding: "12px 28px",
-              fontSize: 14,
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
+            className="btn btn-primary"
+            style={{ padding: "12px 28px", fontSize: 14 }}
           >
             🔄 Retry {curTab?.label}
           </button>
